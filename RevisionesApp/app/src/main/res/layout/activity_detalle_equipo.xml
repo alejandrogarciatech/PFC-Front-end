@@ -1,0 +1,27 @@
+<!-- activity_detalle_equipo.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/nombreEquipoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Equipo"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/marcaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marca del Equipo"
+        android:textSize="18sp"
+        android:layout_below="@id/marcaTextView"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"/>
+
+    <!-- Agrega más TextViews según sea necesario para otros atributos del equipo -->
+
+</RelativeLayout>

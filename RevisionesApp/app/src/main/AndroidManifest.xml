@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EquiposActivity"/>
+        <activity android:name=".DetalleEquipoActivity"/>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.pfc.android.revisionesapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import retrofit2.Response
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.E
 
 object RetrofitClient {
     private const val BASE_URL = "http://192.168.1.39:8080/"
@@ -44,6 +46,19 @@ class EquiposActivity: AppCompatActivity() {
 
                         val equiposAdapter = EquiposAdapter(equipos)
                         equiposRecyclerView.adapter = equiposAdapter
+
+                        equiposAdapter.setOnItemClickListener(object : EquiposAdapter.OnItemClickListener {
+                            override fun onItemClick(equipo: Equipo) {
+                                // Crear un Intent para abrir la actividad de detalles del equipo
+                                val intent = Intent(this@EquiposActivity, DetalleEquipoActivity::class.java)
+
+                                // Pasar el objeto Equipo como extra en el intent
+                                intent.putExtra("equipo", Bundle())
+
+                                // Iniciar la actividad de detalles del equipo
+                                startActivity(intent)
+                            }
+                        })
                     }else {
                         Log.e("Equipos", "la lista de equipos es nula")
                     }

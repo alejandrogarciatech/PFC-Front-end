@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RevisionesApp</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_equipos">Equipos</string>
+    <string name="title_incidencias">Incidencias</string>
 </resources>

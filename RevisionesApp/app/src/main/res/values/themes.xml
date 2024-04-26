@@ -2,5 +2,9 @@
 <resources>
 
     <style name="Theme.RevisionesApp" parent="android:Theme.Material.Light.NoActionBar" />
-    <style name="AppTheme" parent="Theme.AppCompat.Light"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Desactivar la barra de acción de la ventana -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

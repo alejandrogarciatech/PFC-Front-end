@@ -15,6 +15,17 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Verificar si ya existe una sesión iniciada
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val savedUsername = sharedPreferences.getString("username", null)
+        val remember = sharedPreferences.getBoolean("remember", false)
+        if (remember && savedUsername != null) {
+            // Si el usuario ha marcado recordar y ha iniciado sesión, redirigir a MainActivity
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.botonLogin.setOnClickListener {
             try {
                 val username = binding.editUser.text.toString()
@@ -27,13 +38,23 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 if (username == "Admin" && password == "admin") {
+                    val remember = binding.checkRecordar.isChecked
                     val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putString("username", username)
+                    if (remember) {
+                        // Si el usuario ha marcado "Recordar", guardar el nombre de usuario y el estado de "Recordar"
+                        editor.putString("username", username)
+                        editor.putBoolean("remember", true)
+                    } else {
+                        // Si el usuario no ha marcado "Recordar", borrar el nombre de usuario y el estado de "Recordar"
+                        editor.remove("username")
+                        editor.remove("remember")
+                    }
                     editor.apply()
 
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
                     Snackbar.make(binding.root, "El usuario o la contraseña son incorrectos", Snackbar.LENGTH_SHORT).show()
                 }

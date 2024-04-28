@@ -14,4 +14,14 @@
         android:id="@+id/navigation_incidencias"
         android:icon="@drawable/ic_incidencias"
         android:title="@string/title_incidencias" />
+
+    <item
+        android:id="@+id/navigation_albaranes"
+        android:icon="@drawable/ic_albaranes"
+        android:title="@string/title_albaranes" />
+
+    <item
+        android:id="@+id/navigation_espacios"
+        android:icon="@drawable/ic_espacios"
+        android:title="@string/title_espacios" />
 </menu>

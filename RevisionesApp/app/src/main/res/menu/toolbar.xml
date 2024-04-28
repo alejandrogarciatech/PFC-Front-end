@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_usuario"
+        android:icon="@drawable/ic_usuario"
+        android:title="@string/title_usuario" />
+
+    <item
+        android:id="@+id/navigation_notificaciones"
+        android:icon="@drawable/ic_notificaciones"
+        android:title="@string/title_notificaciones" />
+</menu>

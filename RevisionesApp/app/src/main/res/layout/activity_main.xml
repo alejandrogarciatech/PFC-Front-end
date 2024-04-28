@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:background="@color/teal_700"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:menu="@menu/bottom_navigation_menu"
-            android:background="@color/teal_700"/>
-
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Página de Inicio"
-        android:textSize="24sp" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/navigation_bars"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/btnEquipos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:onClick="irAEquiposActivity"
         android:text="Ir a Equipos"
-        android:layout_marginTop="16dp"
-        android:onClick="irAEquiposActivity" />
-</RelativeLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include" />
+
+    <Button
+        android:id="@+id/btnIncidencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAIncidenciasActivity"
+        android:text="Ir a Incidencias"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEquipos" />
+
+    <Button
+        android:id="@+id/btnAlbaranes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAAlbaranesActivity"
+        android:text="Ir a Albaranes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEspacios" />
+
+    <Button
+        android:id="@+id/btnEspacios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAEspaciosActivity"
+        android:text="Ir a Espacios"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIncidencias" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

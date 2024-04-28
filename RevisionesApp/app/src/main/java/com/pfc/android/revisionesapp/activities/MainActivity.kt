@@ -2,6 +2,7 @@ package com.pfc.android.revisionesapp.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -26,11 +27,23 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_equipos -> {
-                    // Handle navigation to dashboard
+                    val intent = Intent(this, EquiposActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.navigation_incidencias -> {
-                    // Handle navigation to notifications
+                    val intent = Intent(this, IncidenciasActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.navigation_albaranes -> {
+                    val intent = Intent(this, AlbaranesActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.navigation_espacios -> {
+                    val intent = Intent(this, EspaciosActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false
@@ -38,8 +51,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return true
+    }
+
     fun irAEquiposActivity(view: View) {
         val intent = Intent(this, EquiposActivity::class.java)
+        startActivity(intent)
+    }
+    fun irAIncidenciasActivity(view: View) {
+        val intent = Intent(this, IncidenciasActivity::class.java)
+        startActivity(intent)
+    }
+    fun irAAlbaranesActivity(view: View) {
+        val intent = Intent(this, AlbaranesActivity::class.java)
+        startActivity(intent)
+    }
+    fun irAEspaciosActivity(view: View) {
+        val intent = Intent(this, EspaciosActivity::class.java)
         startActivity(intent)
     }
 }

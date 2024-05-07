@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.InicioFragment">
+
+    <Button
+        android:id="@+id/btnEquipos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAEquiposFragment"
+        android:text="Ir a Equipos"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnIncidencias"/>
+
+    <Button
+        android:id="@+id/btnIncidencias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAIncidenciasFragment"
+        android:text="Ir a Incidencias"
+        app:layout_constraintTop_toBottomOf="@id/btnEquipos"
+        app:layout_constraintBottom_toTopOf="@id/btnAlbaranes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnAlbaranes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAAlbaranesFragment"
+        android:text="Ir a Albaranes"
+        app:layout_constraintTop_toBottomOf="@id/btnIncidencias"
+        app:layout_constraintBottom_toTopOf="@id/btnEspacios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnEspacios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="irAEspaciosFragment"
+        android:text="Ir a Espacios"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAlbaranes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

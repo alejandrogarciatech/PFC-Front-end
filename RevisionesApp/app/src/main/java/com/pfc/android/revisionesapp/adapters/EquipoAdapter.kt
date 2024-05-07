@@ -47,4 +47,9 @@ class EquipoAdapter(var lista: ArrayList<Equipo>, var contexto: Context) :
     override fun getItemCount(): Int {
         return lista.size
     }
+
+    fun updateList(lista: List<Equipo>?) {
+        this.lista = lista as ArrayList<Equipo>
+        notifyDataSetChanged()
+    }
 }

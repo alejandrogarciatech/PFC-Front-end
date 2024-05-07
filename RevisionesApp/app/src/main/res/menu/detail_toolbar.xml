@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_back"
+        android:icon="@drawable/ic_back"
+        android:title="@string/title_back"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_editar"
+        android:icon="@drawable/ic_editar"
+        android:title="@string/title_editar"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
+        android:title="@string/title_save"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+</menu>

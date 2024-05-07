@@ -81,4 +81,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.journeyapps:zxing-android-embedded:4.2.0")
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
 }

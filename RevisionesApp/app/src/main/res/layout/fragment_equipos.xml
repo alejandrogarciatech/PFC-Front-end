@@ -5,19 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EquiposFragment">
-
-<!--    <fragment-->
-<!--        android:id="@+id/scannerFragment"-->
-<!--        android:name="com.pfc.android.revisionesapp.activities.ScannerFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/equiposRecyclerView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/equiposRecyclerView"-->
-<!--        app:layout_constraintVertical_bias="0.933" />-->
+    tools:context=".fragments.EquiposFragment"
+    android:id="@+id/equiposFragment">
 
     <TextView
         android:id="@+id/tituloTextView"
@@ -29,6 +18,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCrearEquipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Equipo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/filtrarEquipoEditText"

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/inicioFragment">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.InicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment2_to_equiposFragment"
+            app:destination="@id/equiposFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_incidenciasFragment"
+            app:destination="@id/incidenciasFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_albaranesFragment"
+            app:destination="@id/albaranesFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_espaciosFragment"
+            app:destination="@id/espaciosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/equiposFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.EquiposFragment"
+        android:label="fragment_equipos"
+        tools:layout="@layout/fragment_equipos">
+        <action
+            android:id="@+id/action_equiposFragment_to_equipoDetailFragment"
+            app:destination="@id/equipoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/equipoDetailFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.EquipoDetailFragment"
+        android:label="fragment_equipo_detail"
+        tools:layout="@layout/fragment_equipo_detail" />
+    <fragment
+        android:id="@+id/incidenciasFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.IncidenciasFragment"
+        android:label="fragment_incidencias"
+        tools:layout="@layout/fragment_incidencias" />
+    <fragment
+        android:id="@+id/albaranesFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.AlbaranesFragment"
+        android:label="fragment_albaranes"
+        tools:layout="@layout/fragment_albaranes" />
+    <fragment
+        android:id="@+id/espaciosFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.EspaciosFragment"
+        android:label="fragment_espacios"
+        tools:layout="@layout/fragment_espacios" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.pfc.android.revisionesapp.activities.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+
+</navigation>

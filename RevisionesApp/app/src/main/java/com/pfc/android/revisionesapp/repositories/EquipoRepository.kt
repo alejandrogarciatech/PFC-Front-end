@@ -64,4 +64,20 @@ class EquipoRepository(private val context: Context) {
             }
         })
     }
+
+    fun createEquipo(equipo: Equipo) {
+        apiService.createEquipo(equipo).enqueue(object : Callback<Equipo> {
+            override fun onResponse(call: Call<Equipo>, response: Response<Equipo>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Equipo creado con éxito", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error al crear el equipo. Código de estado: ${response.code()}, Mensaje: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Equipo>, t: Throwable) {
+                Toast.makeText(context, "Fallo al crear el equipo", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }

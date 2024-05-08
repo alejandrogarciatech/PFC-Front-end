@@ -38,13 +38,13 @@ class EquiposFragment : Fragment() {
     private lateinit var binding: FragmentEquiposBinding
     private lateinit var listaEquipo: ArrayList<Equipo>
     private lateinit var equipoAdapter: EquipoAdapter
-    val apiService = RetrofitClient.retrofit.create(ApiService::class.java)
-    val call = apiService.getEquipos()
+    private val apiService = RetrofitClient.retrofit.create(ApiService::class.java)
+    private val call = apiService.getEquipos()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEquiposBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,6 +52,14 @@ class EquiposFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnCrearEquipo.setOnClickListener {
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            val bundle = Bundle().apply {
+                putBoolean("nuevoEquipo", true)
+            }
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
         equipoAdapter = EquipoAdapter(ArrayList(), requireContext())
         listaEquipo = ArrayList()
         equipoAdapter = EquipoAdapter(listaEquipo, requireContext())
@@ -97,7 +105,7 @@ class EquiposFragment : Fragment() {
                 equipo.nombre.contains(filtro.toString(), ignoreCase = true) || equipo.id.contains(
                     filtro.toString(),
                     ignoreCase = true
-                ) || equipo.tipoProducto.toString().contains(filtro.toString(), ignoreCase = true)
+                ) || equipo.tipoProducto.contains(filtro.toString(), ignoreCase = true)
             }
             equipoAdapter.updateList(equiposFiltrados as ArrayList<Equipo>)
         }
@@ -113,9 +121,7 @@ class EquiposFragment : Fragment() {
         }
     }
 
-    fun actualizarListaEquipos() {
-        // Aquí debes llamar a la API para obtener la lista actualizada de equipos
-        // y luego actualizar tu adaptador con la nueva lista
+    private fun actualizarListaEquipos() {
         val call = apiService.getEquipos()
         call.enqueue(object : Callback<List<Equipo>> {
             override fun onResponse(call: Call<List<Equipo>>, response: Response<List<Equipo>>) {

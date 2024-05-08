@@ -82,4 +82,6 @@ dependencies {
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.journeyapps:zxing-android-embedded:4.2.0")
     implementation("androidx.fragment:fragment-ktx:1.7.0")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.4.1")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")
 }

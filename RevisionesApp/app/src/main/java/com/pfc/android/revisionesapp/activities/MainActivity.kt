@@ -25,7 +25,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener {
 
     lateinit var binding: ActivityMainBinding
 
@@ -82,16 +82,11 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this@MainActivity, "Cancelado", Toast.LENGTH_SHORT).show()
-            } else {
+            if (result.contents != null) {
                 val equipoId = result.contents
                 getEquipo(equipoId)
-                Toast.makeText(
-                    this@MainActivity,
-                    "El equipo escaneado es $equipoId",
-                    Toast.LENGTH_SHORT
-                ).show()
+            } else {
+                Toast.makeText(this@MainActivity, "Cancelado", Toast.LENGTH_SHORT).show()
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -111,20 +106,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun abrirDetalleEquipo(equipo: Equipo) {
-        val fragment = EquipoDetailFragment()
-        val bundle = Bundle()
-        bundle.putSerializable("equipo", equipo)
-        fragment.arguments = bundle
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(null)
-            .commit()
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("equipo", equipo)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar, menu)
         return true
+    }
+
+    override fun onEditarClick() {
+        invalidateOptionsMenu()
+        val fragment = supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
+        fragment?.toggleEditMode()
+    }
+
+    private fun crearNuevoEquipo() {
+        val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.detail_fragmentContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onBackPressed() {

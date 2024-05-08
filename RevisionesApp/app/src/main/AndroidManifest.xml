@@ -22,15 +22,6 @@
             android:name=".activities.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AlbaranesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.EspaciosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.IncidenciasActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.UsuarioActivity"
             android:exported="false" />
         <activity

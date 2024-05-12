@@ -1,6 +1,7 @@
 package com.pfc.android.revisionesapp.interfaces
 
 import com.pfc.android.revisionesapp.models.Equipo
+import com.pfc.android.revisionesapp.models.Incidencia
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,8 +13,14 @@ interface ApiService {
     @GET("api/equipos")
     fun getEquipos(): Call<List<Equipo>>
 
+    @GET("api/incidencias")
+    fun getIncidencias(): Call<List<Incidencia>>
+
     @GET("api/equipos/{id}")
     fun getEquipos(@Path("id") id: String): Call<Equipo>
+
+    @GET("api/incidencias/{id}")
+    fun getIncidencias(@Path("id") id: String): Call<Incidencia>
 
     @PUT("api/equipos/{id}")
     fun updateEquipo(@Path("id") id: String, @Body equipo: Equipo): Call<Equipo>

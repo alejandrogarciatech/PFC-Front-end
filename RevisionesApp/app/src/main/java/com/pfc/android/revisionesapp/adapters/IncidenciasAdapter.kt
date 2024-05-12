@@ -4,34 +4,35 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pfc.android.revisionesapp.R
-import com.pfc.android.revisionesapp.models.Equipo
+import com.pfc.android.revisionesapp.models.Incidencia
 
-class EquipoAdapter(var lista: ArrayList<Equipo>, var contexto: Context) :
-    RecyclerView.Adapter<EquipoAdapter.ViewHolder>() {
+class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context) :
+    RecyclerView.Adapter<IncidenciasAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var id: TextView = itemView.findViewById(R.id.idEquipoTextView)
-        var nombre: TextView = itemView.findViewById(R.id.nombreEquipoTextView)
-        var tipoProducto: TextView = itemView.findViewById(R.id.tipoProductoEquipoTextView)
+        var imagen: ImageView = itemView.findViewById(R.id.item_imagen)
+        var nombre: TextView = itemView.findViewById(R.id.item_titulo)
+        var descripcion: TextView = itemView.findViewById(R.id.item_detalle)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val view: View =
-            LayoutInflater.from(contexto).inflate(R.layout.item_equipo, viewGroup, false)
+            LayoutInflater.from(contexto).inflate(R.layout.card_incidencia, viewGroup, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val equipo: Equipo = lista[position]
-        viewHolder.id.text = equipo.id
-        viewHolder.nombre.text = equipo.nombre
-        viewHolder.tipoProducto.text = equipo.tipoProducto.toString()
+        val incidencia: Incidencia = lista[position]
+        //viewHolder.imagen.setImageResource(incidencia.imagen)
+        viewHolder.nombre.text = incidencia.nombre
+        viewHolder.descripcion.text = incidencia.descripcion
 
         viewHolder.itemView.setOnClickListener {
-            listener.onItemClick(equipo)
+            listener.onItemClick(incidencia)
         }
     }
 
@@ -40,7 +41,7 @@ class EquipoAdapter(var lista: ArrayList<Equipo>, var contexto: Context) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(equipo: Equipo)
+        fun onItemClick(incidencia: Incidencia)
     }
 
     lateinit var listener: OnItemClickListener
@@ -49,8 +50,8 @@ class EquipoAdapter(var lista: ArrayList<Equipo>, var contexto: Context) :
         this.listener = listener
     }
 
-    fun updateList(lista: List<Equipo>?) {
-        this.lista = lista as ArrayList<Equipo>
+    fun updateList(lista: List<Incidencia>?) {
+        this.lista = lista as ArrayList<Incidencia>
         notifyDataSetChanged()
     }
 }

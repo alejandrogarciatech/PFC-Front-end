@@ -2,29 +2,21 @@ package com.pfc.android.revisionesapp.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.zxing.integration.android.IntentIntegrator
 import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.databinding.ActivityMainBinding
-import com.pfc.android.revisionesapp.fragments.AlbaranesFragment
 import com.pfc.android.revisionesapp.fragments.EquipoDetailFragment
-import com.pfc.android.revisionesapp.fragments.EquiposFragment
-import com.pfc.android.revisionesapp.fragments.EspaciosFragment
-import com.pfc.android.revisionesapp.fragments.IncidenciasFragment
-import com.pfc.android.revisionesapp.fragments.InicioFragment
-import com.pfc.android.revisionesapp.interfaces.ApiService
 import com.pfc.android.revisionesapp.models.Equipo
 import com.pfc.android.revisionesapp.repositories.EquipoRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
+@Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener {
 
     lateinit var binding: ActivityMainBinding
@@ -34,39 +26,19 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Barras de herramientas
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // BOTTOM NAVIGATION
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        // TOOLBAR
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         setSupportActionBar(binding.toolbar)
 
-        // Barra de navegación inferior
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            val fragment = when (item.itemId) {
-                R.id.navigation_home -> InicioFragment()
-                R.id.navigation_equipos -> EquiposFragment()
-                R.id.navigation_incidencias -> IncidenciasFragment()
-                R.id.navigation_albaranes -> AlbaranesFragment()
-                R.id.navigation_espacios -> EspaciosFragment()
-                else -> null
-            }
-
-            if (fragment != null) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment)
-                    .commit()
-            }
-
-            true
-        }
-
-        if (savedInstanceState == null) {
-            val inicioFragment = InicioFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, inicioFragment)
-                .commit()
-        }
-
-        // Set the scanner button
+        // SCANNER
         binding.btnScanner.setOnClickListener { initScanner() }
     }
 
@@ -118,28 +90,31 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
 
     override fun onEditarClick() {
         invalidateOptionsMenu()
-        val fragment = supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
+        val fragment =
+            supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
         fragment?.toggleEditMode()
     }
 
-    private fun crearNuevoEquipo() {
-        val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.detail_fragmentContainer, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+//    private fun crearNuevoEquipo() {
+//        val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.detail_fragmentContainer, fragment)
+//            .addToBackStack(null)
+//            .commit()
+//    }
 
+    // Sobreescribir el método onBackPressed para controlar la navegación
     override fun onBackPressed() {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
 
-        if (currentFragment !is InicioFragment) {
-            val inicioFragment = InicioFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, inicioFragment)
-                .commit()
-            binding.bottomNavigation.selectedItemId = R.id.navigation_home
+        val navController = findNavController(R.id.navHostFragment)
+        val currentDestination = navController.currentDestination
+
+        // Verificar si hay un destino en la pila hacia el cual deberíamos retroceder
+        if (currentDestination?.id != R.id.inicioFragment) {
+            // Si no estamos en el fragmento de inicio, retrocedemos al fragmento anterior
+            navController.navigateUp()
         } else {
+            // Si estamos en el fragmento de inicio, llamamos al comportamiento predeterminado de onBackPressed
             super.onBackPressed()
         }
     }

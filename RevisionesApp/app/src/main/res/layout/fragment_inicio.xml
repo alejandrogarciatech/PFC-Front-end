@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InicioFragment"
-    android:id="@+id/inicioFragment">
+    android:id="@+id/inicioFragment"
+    android:background="#0712DA">
 
     <Button
         android:id="@+id/btnEquipos"

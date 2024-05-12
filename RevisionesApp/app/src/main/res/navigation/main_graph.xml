@@ -11,7 +11,7 @@
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" >
         <action
-            android:id="@+id/action_inicioFragment2_to_equiposFragment"
+            android:id="@+id/action_inicioFragment_to_equiposFragment"
             app:destination="@id/equiposFragment" />
         <action
             android:id="@+id/action_inicioFragment_to_incidenciasFragment"
@@ -30,7 +30,8 @@
         tools:layout="@layout/fragment_equipos">
         <action
             android:id="@+id/action_equiposFragment_to_equipoDetailFragment"
-            app:destination="@id/equipoDetailFragment" />
+            app:destination="@id/equipoDetailFragment"
+            app:popUpTo="@id/equiposFragment"/>
     </fragment>
     <fragment
         android:id="@+id/equipoDetailFragment"

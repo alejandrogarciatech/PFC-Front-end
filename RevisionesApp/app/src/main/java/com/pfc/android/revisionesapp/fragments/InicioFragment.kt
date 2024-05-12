@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.activities.MainActivity
 import com.pfc.android.revisionesapp.databinding.FragmentInicioBinding
@@ -25,46 +26,36 @@ class InicioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+
         binding.btnEquipos.setOnClickListener {
-            val equiposFragment = EquiposFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, equiposFragment)
-                .commit()
+                navController.navigate(R.id.action_inicioFragment_to_equiposFragment)
             (activity as MainActivity).binding.bottomNavigation.selectedItemId =
-                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.navigation_equipos).itemId
+                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.equiposFragment).itemId
         }
 
         binding.btnIncidencias.setOnClickListener {
-            val incidenciasFragment = IncidenciasFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, incidenciasFragment)
-                .commit()
+            navController.navigate(R.id.action_inicioFragment_to_incidenciasFragment)
             (activity as MainActivity).binding.bottomNavigation.selectedItemId =
-                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.navigation_incidencias).itemId
+                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.incidenciasFragment).itemId
         }
 
         binding.btnAlbaranes.setOnClickListener {
-            val albaranesFragment = AlbaranesFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, albaranesFragment)
-                .commit()
+            navController.navigate(R.id.action_inicioFragment_to_albaranesFragment)
             (activity as MainActivity).binding.bottomNavigation.selectedItemId =
-                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.navigation_albaranes).itemId
+                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.albaranesFragment).itemId
         }
 
         binding.btnEspacios.setOnClickListener {
-            val espaciosFragment = EspaciosFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, espaciosFragment)
-                .commit()
+            navController.navigate(R.id.action_inicioFragment_to_espaciosFragment)
             (activity as MainActivity).binding.bottomNavigation.selectedItemId =
-                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.navigation_espacios).itemId
+                (activity as MainActivity).binding.bottomNavigation.menu.findItem(R.id.espaciosFragment).itemId
         }
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }

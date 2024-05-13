@@ -17,7 +17,7 @@ class EquipoRepository(private val context: Context) {
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.39:8080/")
+            .baseUrl("http://192.168.1.37:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

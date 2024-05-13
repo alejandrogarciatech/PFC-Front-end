@@ -42,7 +42,12 @@
         android:id="@+id/incidenciasFragment"
         android:name="com.pfc.android.revisionesapp.fragments.IncidenciasFragment"
         android:label="fragment_incidencias"
-        tools:layout="@layout/fragment_incidencias" />
+        tools:layout="@layout/fragment_incidencias" >
+        <action
+            android:id="@+id/action_incidenciasFragment_to_incidenciaDetailFragment"
+            app:destination="@id/incidenciaDetailFragment"
+            app:popUpTo="@id/incidenciasFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/albaranesFragment"
         android:name="com.pfc.android.revisionesapp.fragments.AlbaranesFragment"
@@ -58,5 +63,9 @@
         android:name="com.pfc.android.revisionesapp.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/incidenciaDetailFragment"
+        android:name="com.pfc.android.revisionesapp.fragments.IncidenciaDetailFragment"
+        android:label="IncidenciaDetailFragment" />
 
 </navigation>

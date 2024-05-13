@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="30dp"
-    tools:context=".fragments.EquipoDetailFragment"
-    android:id="@+id/equipoDetailFragment">
+    tools:context=".fragments.IncidenciaDetailFragment"
+    android:id="@+id/incidenciaDetailFragment">
 
     <TableRow>
         <TextView
@@ -17,23 +17,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/idEquipoEditText"
-            android:layout_width="227dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:id="@+id/nombreLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/nombreEquipoEditText"
+            android:id="@+id/idIncidenciaEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -41,15 +25,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/tipoProductoLabel"
+            android:id="@+id/descripcionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Producto:"
+            android:text="Descripción:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/tipoProductoEquipoEditText"
+            android:id="@+id/descripcionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -57,15 +41,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/marcaLabel"
+            android:id="@+id/estadoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Marca:"
+            android:text="Estado:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/marcaEquipoEditText"
+            android:id="@+id/estadoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -73,15 +57,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/modeloLabel"
+            android:id="@+id/prioridadLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modelo:"
+            android:text="Prioridad:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/modeloEquipoEditText"
+            android:id="@+id/prioridadEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -89,15 +73,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/nSerieLabel"
+            android:id="@+id/albaranLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nº Serie:"
+            android:text="Albarán:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/nSerieEquipoEditText"
+            android:id="@+id/albaranEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -105,15 +89,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/pesoLabel"
+            android:id="@+id/usuarioLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Peso:"
+            android:text="Usuario:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/pesoEquipoEditText"
+            android:id="@+id/usuarioEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -121,15 +105,15 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/dimensionesLabel"
+            android:id="@+id/fcreacionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dimensiones:"
+            android:text="Fecha de Creación:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/dimensionesEquipoEditText"
+            android:id="@+id/fcreacionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
@@ -137,15 +121,31 @@
 
     <TableRow>
         <TextView
-            android:id="@+id/ubicacionLabel"
+            android:id="@+id/factualizacionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicación:"
+            android:text="Fecha de Actualización:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/ubicacionEquipoEditText"
+            android:id="@+id/factualizacionEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/equipoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipo:"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/equipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp" />

@@ -91,7 +91,7 @@ class EquipoDetailFragment : Fragment() {
     fun toggleEditMode() {
         modoEdicionActivo = !modoEdicionActivo
         with(binding) {
-            idEquipoEditText.isEnabled = modoEdicionActivo
+            idEquipoEditText.isEnabled = modoEdicionActivo || nuevoEquipo
             nombreEquipoEditText.isEnabled = modoEdicionActivo
             tipoProductoEquipoEditText.isEnabled = modoEdicionActivo
             modeloEquipoEditText.isEnabled = modoEdicionActivo

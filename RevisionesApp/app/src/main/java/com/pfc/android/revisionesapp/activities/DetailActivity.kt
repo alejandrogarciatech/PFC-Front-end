@@ -7,20 +7,37 @@ import androidx.appcompat.app.AppCompatActivity
 import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.databinding.ActivityDetailBinding
 import com.pfc.android.revisionesapp.fragments.EquipoDetailFragment
+import com.pfc.android.revisionesapp.fragments.IncidenciaDetailFragment
 import com.pfc.android.revisionesapp.models.Equipo
 
 @Suppress("DEPRECATION")
-class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener {
+class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener, IncidenciaDetailFragment.OnEditarClickListener {
 
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var incidenciaDetailFragment: IncidenciaDetailFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Configurar la toolbar
         setSupportActionBar(binding.detailToolbar)
 
+        // Obtener el id de la incidencia
+        val incidenciaId = intent.getIntExtra("incidenciaId", -1)
+        if (incidenciaId != -1) {
+            incidenciaDetailFragment = IncidenciaDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("incidenciaId", incidenciaId)
+                }
+            }
+            supportFragmentManager.beginTransaction()
+                .add(R.id.detail_fragmentContainer, incidenciaDetailFragment)
+                .commit()
+        }
+
+        // Obtener el id del equipo
         if (intent.extras?.getBoolean("nuevoEquipo", false) == true) {
             val fragment = EquipoDetailFragment()
             supportFragmentManager.beginTransaction()

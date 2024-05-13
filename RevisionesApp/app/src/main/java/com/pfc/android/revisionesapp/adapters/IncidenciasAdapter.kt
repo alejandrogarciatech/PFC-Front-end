@@ -1,6 +1,7 @@
 package com.pfc.android.revisionesapp.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pfc.android.revisionesapp.R
+import com.pfc.android.revisionesapp.activities.DetailActivity
 import com.pfc.android.revisionesapp.models.Incidencia
 
 class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context) :
@@ -17,6 +19,15 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
         var imagen: ImageView = itemView.findViewById(R.id.item_imagen)
         var nombre: TextView = itemView.findViewById(R.id.item_titulo)
         var descripcion: TextView = itemView.findViewById(R.id.item_detalle)
+        fun bind(incidencia: Incidencia) {
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                    putExtra("incidenciaId", incidencia.id)
+                }
+                itemView.context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
@@ -27,7 +38,7 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val incidencia: Incidencia = lista[position]
-        //viewHolder.imagen.setImageResource(incidencia.imagen)
+        viewHolder.imagen.setImageResource(R.drawable.ic_launcher_foreground)
         viewHolder.nombre.text = incidencia.nombre
         viewHolder.descripcion.text = incidencia.descripcion
 

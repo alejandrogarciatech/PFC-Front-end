@@ -20,7 +20,7 @@ interface ApiService {
     fun getEquipos(@Path("id") id: String): Call<Equipo>
 
     @GET("api/incidencias/{id}")
-    fun getIncidencias(@Path("id") id: String): Call<Incidencia>
+    fun getIncidencias(@Path("id") id: Int): Call<Incidencia>
 
     @PUT("api/equipos/{id}")
     fun updateEquipo(@Path("id") id: String, @Body equipo: Equipo): Call<Equipo>

@@ -51,14 +51,14 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
         return lista.size
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(incidencia: Incidencia)
-    }
-
     lateinit var listener: OnItemClickListener
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(incidencia: Incidencia)
     }
 
     fun updateList(lista: List<Incidencia>?) {

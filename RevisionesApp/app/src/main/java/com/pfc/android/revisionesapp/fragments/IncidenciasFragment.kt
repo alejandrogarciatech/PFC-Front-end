@@ -22,7 +22,7 @@ class IncidenciasFragment : Fragment() {
     private lateinit var binding: FragmentIncidenciasBinding
     private lateinit var listaIncidencias: ArrayList<Incidencia>
     private lateinit var incidenciasAdapter: IncidenciasAdapter
-    private val apiService = RetrofitClient.retrofit.create(ApiService::class.java)
+    private val apiService = RetrofitClient.instance.create(ApiService::class.java)
     private val call = apiService.getIncidencias()
 
     override fun onCreateView(
@@ -47,22 +47,27 @@ class IncidenciasFragment : Fragment() {
         call.enqueue(object : Callback<List<Incidencia>> {
             override fun onResponse(call: Call<List<Incidencia>>, response: Response<List<Incidencia>>) {
                 if (response.isSuccessful) {
-                    listaIncidencias = response.body() as ArrayList<Incidencia>
-                    incidenciasAdapter.updateList(listaIncidencias)
+                    val incidencias = response.body()
+                    if (incidencias != null) {
+                        Log.d("Incidencias", incidencias.toString())
+                        listaIncidencias = incidencias as ArrayList<Incidencia>
+                        incidenciasAdapter.updateList(listaIncidencias)
 
-                    incidenciasAdapter.setOnItemClickListener(object :
-                        IncidenciasAdapter.OnItemClickListener {
-                        override fun onItemClick(incidencia: Incidencia) {
-                            val intent = Intent(requireActivity(), DetailActivity::class.java)
-                            intent.putExtra("incidencia", incidencia)
-                            startActivity(intent)
-                        }
-                    })
+                        incidenciasAdapter.setOnItemClickListener(object :
+                            IncidenciasAdapter.OnItemClickListener {
+                            override fun onItemClick(incidencia: Incidencia) {
+                                val intent = Intent(requireActivity(), DetailActivity::class.java)
+                                intent.putExtra("incidencia", incidencia)
+                                startActivity(intent)
+                            }
+                        })
+                    } else {
+                        Log.e("Incidencias", "la lista de incidencias es nula")
+                    }
                 }
             }
-
             override fun onFailure(call: Call<List<Incidencia>>, t: Throwable) {
-                Log.e("ERROR", t.message.toString())
+                Log.e("Incidencias", "Error al realizar la solicitud: ${t.message}")
             }
         })
     }

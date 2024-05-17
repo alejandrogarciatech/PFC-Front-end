@@ -6,6 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.IncidenciasFragment">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addIncidenciaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/incidenciasRecyclerView"
         android:layout_width="match_parent"

@@ -6,8 +6,10 @@ data class Usuario(
     var id: Long,
     var nombre: String,
     var apellido: String,
-    var puesto: String,
-    var correo: String,
-    var contrasena: String,
-    var telefono: String
+    var fechaNacimiento: String,
+    var rol: String,
+    var telefono: String,
+    var email: String,
+    var username: String,
+    var password: String
 ) : Serializable

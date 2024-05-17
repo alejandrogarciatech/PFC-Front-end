@@ -11,6 +11,9 @@
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" >
         <action
+            android:id="@+id/action_inicioFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+        <action
             android:id="@+id/action_inicioFragment_to_equiposFragment"
             app:destination="@id/equiposFragment" />
         <action
@@ -67,5 +70,9 @@
         android:id="@+id/incidenciaDetailFragment"
         android:name="com.pfc.android.revisionesapp.fragments.IncidenciaDetailFragment"
         android:label="IncidenciaDetailFragment" />
-
+    <activity
+        android:id="@+id/perfilUsuarioActivity"
+        android:name="com.pfc.android.revisionesapp.activities.PerfilUsuarioActivity"
+        android:label="PerfilUsuarioActivity" >
+    </activity>
 </navigation>

@@ -22,7 +22,7 @@
             android:name=".activities.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.UsuarioActivity"
+            android:name=".activities.PerfilUsuarioActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"

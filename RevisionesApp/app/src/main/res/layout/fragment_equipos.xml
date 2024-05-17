@@ -7,18 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.EquiposFragment"
     android:id="@+id/equiposFragment"
-    android:background="#CC0F0F">
-
-    <TextView
-        android:id="@+id/tituloTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lista de Equipos"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:paddingTop="10dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
 
     <Button
         android:id="@+id/btnCrearEquipo"
@@ -40,7 +31,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloTextView" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout
         android:id="@+id/headerEquipo"

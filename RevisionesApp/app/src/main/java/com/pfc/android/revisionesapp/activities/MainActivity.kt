@@ -3,6 +3,7 @@ package com.pfc.android.revisionesapp.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         setSupportActionBar(binding.toolbar)
+        binding.toolbar.setupWithNavController(navController)
 
         // SCANNER
         binding.btnScanner.setOnClickListener { initScanner() }
@@ -86,6 +88,21 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.perfilUsuarioActivity -> {
+                val intent = Intent(this, PerfilUsuarioActivity::class.java)
+                // Aquí puedes agregar cualquier dato extra que quieras pasar a PerfilUsuarioActivity
+                // por ejemplo:
+                intent.putExtra("USERNAME", "nombreDeUsuario")
+                intent.putExtra("PASSWORD", "contraseña")
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onEditarClick() {

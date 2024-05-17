@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_usuario"
+        android:id="@+id/perfilUsuarioActivity"
         android:icon="@drawable/ic_usuario"
         android:title="@string/title_usuario"
         app:showAsAction="always"/>

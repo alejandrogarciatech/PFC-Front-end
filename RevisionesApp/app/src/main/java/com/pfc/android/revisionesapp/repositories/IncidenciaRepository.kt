@@ -23,28 +23,28 @@ class IncidenciaRepository (private val context: Context){
         apiService = retrofit.create(ApiService::class.java)
     }
 
-    fun getIncidencia(incidenciaId: Int, onSuccess: (Incidencia) -> Unit, onError: (String) -> Unit) {
-        apiService.getIncidencias(incidenciaId).enqueue(object : Callback<Incidencia> {
-            override fun onResponse(call: Call<Incidencia>, response: Response<Incidencia>) {
-                if (response.isSuccessful) {
-                    val incidencia = response.body()
-                    if (incidencia != null) {
-                        onSuccess(incidencia)
-                    } else {
-                        onError("La incidencia con ID $incidenciaId no existe")
-                    }
-                } else {
-                    Log.e(
-                        "API ERROR",
-                        "Response Code: " + response.code() + " Message: " + response.message()
-                    )
-                    onError("ERROR al obtener la incidencia")
-                }
-            }
-
-            override fun onFailure(call: Call<Incidencia>, t: Throwable) {
-                onError("FALLO al obtener la incidencia")
-            }
-        })
-    }
+//    fun getIncidencias(incidenciaId: Int, onSuccess: (Incidencia) -> Unit, onError: (String) -> Unit) {
+//        apiService.getIncidencias(incidenciaId).enqueue(object : Callback<Incidencia> {
+//            override fun onResponse(call: Call<Incidencia>, response: Response<Incidencia>) {
+//                if (response.isSuccessful) {
+//                    val incidencia = response.body()
+//                    if (incidencia != null) {
+//                        onSuccess(incidencia)
+//                    } else {
+//                        onError("La incidencia con ID $incidenciaId no existe")
+//                    }
+//                } else {
+//                    Log.e(
+//                        "API ERROR",
+//                        "Response Code: " + response.code() + " Message: " + response.message()
+//                    )
+//                    onError("ERROR al obtener la incidencia")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Incidencia>, t: Throwable) {
+//                onError("FALLO al obtener la incidencia")
+//            }
+//        })
+//    }
 }

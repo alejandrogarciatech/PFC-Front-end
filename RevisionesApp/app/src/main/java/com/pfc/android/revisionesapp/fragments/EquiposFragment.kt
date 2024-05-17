@@ -27,7 +27,7 @@ class EquiposFragment : Fragment() {
     private lateinit var binding: FragmentEquiposBinding
     private lateinit var listaEquipo: ArrayList<Equipo>
     private lateinit var equipoAdapter: EquipoAdapter
-    private val apiService = RetrofitClient.retrofit.create(ApiService::class.java)
+    private val apiService = RetrofitClient.instance.create(ApiService::class.java)
     private val call = apiService.getEquipos()
 
     override fun onCreateView(

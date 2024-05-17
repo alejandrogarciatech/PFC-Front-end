@@ -85,5 +85,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.7.0")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.4.1")
     implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")
-    implementation ("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
 }

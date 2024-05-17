@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.pfc.android.revisionesapp.models.PerfilUsuarioViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvProfileHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil de usuario"
+            android:textSize="24sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/tvProfileHeader"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_perfil"/>
+
+        <TextView
+            android:id="@+id/tvInfoHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Información"
+            android:textSize="18sp"
+            android:layout_below="@id/ivProfilePicture"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentStart="true"/>
+
+        <LinearLayout
+            android:id="@+id/llForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/tvInfoHeader"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/etId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ID"
+                android:enabled="false"
+                android:text="@={viewModel.userId}"/>
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:text="@={viewModel.userUsername}"/>
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:text="@={viewModel.userName}"/>
+
+            <EditText
+                android:id="@+id/etSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Apellido"
+                android:text="@={viewModel.userSurname}"/>
+
+            <EditText
+                android:id="@+id/etBirthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fecha de nacimiento"
+                android:text="@={viewModel.userBirthdate}"/>
+
+            <EditText
+                android:id="@+id/etRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Rol"
+                android:enabled="false"
+                android:text="@={viewModel.userRole}"/>
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Teléfono"
+                android:text="@={viewModel.userPhone}"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correo Electrónico"
+                android:text="@={viewModel.userEmail}"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:text="@={viewModel.userPassword}"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opciones"
+            android:textSize="18sp"
+            android:layout_below="@id/llForm"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentStart="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/tvOptions"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cerrar sesión"/>
+
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Editar perfil"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

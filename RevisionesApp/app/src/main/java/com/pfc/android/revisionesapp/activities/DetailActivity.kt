@@ -1,5 +1,6 @@
 package com.pfc.android.revisionesapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,12 +10,12 @@ import com.pfc.android.revisionesapp.databinding.ActivityDetailBinding
 import com.pfc.android.revisionesapp.fragments.EquipoDetailFragment
 import com.pfc.android.revisionesapp.fragments.IncidenciaDetailFragment
 import com.pfc.android.revisionesapp.models.Equipo
+import com.pfc.android.revisionesapp.models.Incidencia
 
 @Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener, IncidenciaDetailFragment.OnEditarClickListener {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var incidenciaDetailFragment: IncidenciaDetailFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +26,25 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
         setSupportActionBar(binding.detailToolbar)
 
         // Obtener el id de la incidencia
-        val incidenciaId = intent.getIntExtra("incidenciaId", -1)
-        if (incidenciaId != -1) {
-            incidenciaDetailFragment = IncidenciaDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("incidenciaId", incidenciaId)
+        if (intent.extras?.getBoolean("nuevaIncidencia", false) == true) {
+            val fragment = IncidenciaDetailFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.detail_fragmentContainer, fragment)
+                .commit()
+        } else {
+            savedInstanceState ?: run {
+                intent.getSerializableExtra("incidencia")?.let { it as Incidencia }?.let { incidencia ->
+                    IncidenciaDetailFragment().apply {
+                        arguments = Bundle().apply {
+                            putSerializable("incidencia", incidencia)
+                        }
+                    }.also { fragment ->
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.detail_fragmentContainer, fragment)
+                            .commit()
+                    }
                 }
             }
-            supportFragmentManager.beginTransaction()
-                .add(R.id.detail_fragmentContainer, incidenciaDetailFragment)
-                .commit()
         }
 
         // Obtener el id del equipo
@@ -108,6 +118,7 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
     override fun onEditarClick() {
         invalidateOptionsMenu()
         (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment)?.toggleEditMode()
+        (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment)?.toggleEditMode()
     }
 
 }

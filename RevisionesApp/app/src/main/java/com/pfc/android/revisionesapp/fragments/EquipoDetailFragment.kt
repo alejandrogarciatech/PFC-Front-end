@@ -13,15 +13,15 @@ import com.pfc.android.revisionesapp.repositories.EquipoRepository
 @Suppress("DEPRECATION")
 class EquipoDetailFragment : Fragment() {
 
-    interface OnEditarClickListener {
-        fun onEditarClick()
-    }
-
     private lateinit var binding: FragmentEquipoDetailBinding
     private lateinit var equipoRepository: EquipoRepository
     private var editarClickListener: OnEditarClickListener? = null
     private var modoEdicionActivo: Boolean = false
     val nuevoEquipo: Boolean = false
+
+    interface OnEditarClickListener {
+        fun onEditarClick()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

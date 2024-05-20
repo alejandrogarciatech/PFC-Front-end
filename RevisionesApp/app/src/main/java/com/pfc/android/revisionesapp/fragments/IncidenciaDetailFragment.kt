@@ -2,6 +2,7 @@ package com.pfc.android.revisionesapp.fragments
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,9 @@ class IncidenciaDetailFragment : Fragment() {
                 //fcreacionEditText.setText(dateFormat.format(incidencia.fechaCreacion))
                 //factualizacionEditText.setText(dateFormat.format(incidencia.fechaActualizacion))
 
+                equipoEditText.setText(incidencia.equipoId)
+
+                Log.d("IncidenciaDetailFragment", "equipoId: ${incidencia.equipoId}")
                 equipoEditText.setText(incidencia.equipoId)
             }
         }

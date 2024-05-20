@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pfc.android.revisionesapp.activities.DetailActivity
+import com.pfc.android.revisionesapp.activities.MainActivity
 import com.pfc.android.revisionesapp.adapters.IncidenciasAdapter
 import com.pfc.android.revisionesapp.databinding.FragmentIncidenciasBinding
 import com.pfc.android.revisionesapp.interfaces.ApiService
@@ -25,6 +26,13 @@ class IncidenciasFragment : Fragment() {
     private val apiService = RetrofitClient.instance.create(ApiService::class.java)
     private val call = apiService.getIncidencias()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Incidencias"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +43,9 @@ class IncidenciasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Incidencias"
 
         incidenciasAdapter = IncidenciasAdapter(ArrayList(), requireContext())
         listaIncidencias = ArrayList()

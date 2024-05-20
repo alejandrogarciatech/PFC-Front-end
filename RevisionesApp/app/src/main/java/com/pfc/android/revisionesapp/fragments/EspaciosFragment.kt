@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pfc.android.revisionesapp.R
+import com.pfc.android.revisionesapp.activities.MainActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +29,8 @@ class EspaciosFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Espacios"
     }
 
     override fun onCreateView(
@@ -36,6 +39,9 @@ class EspaciosFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_espacios, container, false)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Espacios"
     }
 
     companion object {

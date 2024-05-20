@@ -17,7 +17,7 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imagen: ImageView = itemView.findViewById(R.id.item_imagen)
-        var nombre: TextView = itemView.findViewById(R.id.item_titulo)
+        var id: TextView = itemView.findViewById(R.id.item_titulo)
         var descripcion: TextView = itemView.findViewById(R.id.item_detalle)
         fun bind(incidencia: Incidencia) {
 
@@ -39,7 +39,7 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val incidencia: Incidencia = lista[position]
         viewHolder.imagen.setImageResource(R.drawable.ic_launcher_foreground)
-        viewHolder.nombre.text = incidencia.nombre
+        viewHolder.id.text = incidencia.id.toString()
         viewHolder.descripcion.text = incidencia.descripcion
 
         viewHolder.itemView.setOnClickListener {

@@ -42,6 +42,43 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
 
         // SCANNER
         binding.btnScanner.setOnClickListener { initScanner() }
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.inicioFragment -> {
+                    if (navController.currentDestination?.id != R.id.inicioFragment) {
+                        navController.navigate(R.id.inicioFragment)
+                    }
+                    true
+                }
+                R.id.equiposFragment -> {
+                    if (navController.currentDestination?.id != R.id.equiposFragment) {
+                        navController.navigate(R.id.equiposFragment)
+                    }
+                    true
+                }
+                R.id.incidenciasFragment -> {
+                    if (navController.currentDestination?.id != R.id.incidenciasFragment) {
+                        navController.navigate(R.id.incidenciasFragment)
+                    }
+                    true
+                }
+                R.id.albaranesFragment -> {
+                    if (navController.currentDestination?.id != R.id.albaranesFragment) {
+                        navController.navigate(R.id.albaranesFragment)
+                    }
+                    true
+                }
+                R.id.espaciosFragment -> {
+                    if (navController.currentDestination?.id != R.id.espaciosFragment) {
+                        navController.navigate(R.id.espaciosFragment)
+                    }
+                    true
+                }
+                // Repite para los demás ítems de la barra de navegación
+                else -> false
+            }
+        }
     }
 
     private fun initScanner() {

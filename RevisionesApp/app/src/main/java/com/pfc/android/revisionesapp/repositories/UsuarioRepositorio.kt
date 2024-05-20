@@ -12,9 +12,8 @@ class UsuarioRepositorio {
     // llamar a la interfaz
     private val apiService = retrofit.create(com.pfc.android.revisionesapp.interfaces.ApiService::class.java)
 
-    fun getUserByUsernameAndPassword(username: String, password: String, onSuccess: (Usuario) -> Unit, onError: (String) -> Unit) {
-        val credentials = mapOf("username" to username, "password" to password)
-        val call = apiService.login(credentials)
+    fun getUsuarioByUsername(username: String, onSuccess: (Usuario) -> Unit, onError: (String) -> Unit) {
+        val call = apiService.getUsuarioByUsername(username)
 
         call.enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {

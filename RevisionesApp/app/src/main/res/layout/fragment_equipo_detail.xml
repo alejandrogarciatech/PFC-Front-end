@@ -20,7 +20,8 @@
             android:id="@+id/idEquipoEditText"
             android:layout_width="227dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColorHint="#0800FF"/>
     </TableRow>
 
     <TableRow>

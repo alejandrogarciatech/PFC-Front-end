@@ -15,11 +15,17 @@ interface ApiService {
     @POST("/login")
     fun login(@Body credentials: Map<String, String>): Call<Usuario>
 
-//    @POST("api/usuarios/registro")
-//    fun login(@Body credentials: Map<String, String>): Call<Usuario>
+    @GET("api/usuarios")
+    fun getUsuarios(): Call<List<Usuario>>
+
+    @GET("api/usuarios/{username}")
+    fun getUsuarioByUsername(@Path("username") username: String): Call<Usuario>
 
     @PUT("api/usuarios/{id}")
     fun updateUsuario(@Path("id") id: Long, @Body usuario: Usuario): Call<Usuario>
+
+//    @POST("api/usuarios/registro")
+//    fun login(@Body credentials: Map<String, String>): Call<Usuario>
 
     @GET("api/equipos")
     fun getEquipos(): Call<List<Equipo>>

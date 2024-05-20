@@ -11,8 +11,8 @@
     <string name="title_back">Atrás</string>
     <string name="title_editar">Editar</string>
     <string name="title_save">Guardar</string>
-    <string name="ir_a_albaranes">Ir a Albaranes</string>
-    <string name="ir_a_equipos">Ir a Equipos</string>
-    <string name="ir_a_espacios">Ir a Espacios</string>
-    <string name="ir_a_incidencias">Ir a Incidencias</string>
+    <string name="ir_a_albaranes">Albaranes</string>
+    <string name="ir_a_equipos">Equipos</string>
+    <string name="ir_a_espacios">Espacios</string>
+    <string name="ir_a_incidencias">Incidencias</string>
 </resources>

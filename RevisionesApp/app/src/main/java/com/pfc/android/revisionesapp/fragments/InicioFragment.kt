@@ -18,13 +18,16 @@ class InicioFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentInicioBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "RevisionesApp"
 
         val navController = findNavController()
 

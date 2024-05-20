@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.pfc.android.revisionesapp.activities.DetailActivity
+import com.pfc.android.revisionesapp.activities.MainActivity
 import com.pfc.android.revisionesapp.databinding.FragmentEquipoDetailBinding
 import com.pfc.android.revisionesapp.models.Equipo
 import com.pfc.android.revisionesapp.repositories.EquipoRepository
@@ -60,6 +62,9 @@ class EquipoDetailFragment : Fragment() {
                     ubicacionEquipoEditText.setText(equipo.ubicacion)
                 }
                 disableEditMode()
+
+                val detailActivity = activity as DetailActivity
+                detailActivity.supportActionBar?.title = equipo.id
             }
         }
     }

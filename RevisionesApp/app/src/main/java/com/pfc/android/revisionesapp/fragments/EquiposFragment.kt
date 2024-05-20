@@ -14,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pfc.android.revisionesapp.activities.DetailActivity
+import com.pfc.android.revisionesapp.activities.MainActivity
 import com.pfc.android.revisionesapp.adapters.EquipoAdapter
 import com.pfc.android.revisionesapp.databinding.FragmentEquiposBinding
 import com.pfc.android.revisionesapp.interfaces.ApiService
@@ -30,6 +31,13 @@ class EquiposFragment : Fragment() {
     private val apiService = RetrofitClient.instance.create(ApiService::class.java)
     private val call = apiService.getEquipos()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Equipos"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +48,9 @@ class EquiposFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Equipos"
 
         binding.btnCrearEquipo.setOnClickListener {
             val intent = Intent(requireActivity(), DetailActivity::class.java)

@@ -1,7 +1,11 @@
 package com.pfc.android.revisionesapp.activities
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -23,21 +27,41 @@ class PerfilUsuarioActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        // Load user data
-        val username = intent.getStringExtra("username") ?: ""
-        val password = intent.getStringExtra("password") ?: ""
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val password = sharedPreferences.getString("password", null)
 
-        // Log para verificar el nombre de usuario y la contraseña
+        if (username != null && password != null) {
+            viewModel.loadUserData(username)
+        }
         Log.d("PerfilUsuarioActivity", "Nombre de usuario: $username, Contraseña: $password")
-        viewModel.loadUserData(username, password)
 
         // Set up button listeners
-        binding.btnLogout.setOnClickListener {
-            //findNavController(R.id.navHostFragment).navigate(R.id.action_perfilUsuarioActivity_to_loginActivity)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
+        btnLogout.setOnClickListener {
+
+            // Borrar los datos del usuario de las SharedPreferences
+            val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.remove("username")
+            editor.remove("password")
+            editor.remove("remember")
+            editor.apply()
+
+            // Reiniciar la aplicación en LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            finish()
         }
 
-        binding.btnEditProfile.setOnClickListener {
-            viewModel.saveUserData()
+        val btnEditProfile = findViewById<Button>(R.id.btnEditProfile)
+        val etUsername = findViewById<EditText>(R.id.etUsername)
+        // Repite para los demás EditText
+
+        btnEditProfile.setOnClickListener {
+            etUsername.isEnabled = true
+            // Repite para los demás EditText
         }
 
         // Observe changes to update UI

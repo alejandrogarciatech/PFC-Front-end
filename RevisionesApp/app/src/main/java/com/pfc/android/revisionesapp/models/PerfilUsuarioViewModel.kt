@@ -24,8 +24,8 @@ class PerfilUsuarioViewModel : ViewModel() {
     val userUsername = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
 
-    fun loadUserData(username: String, password: String) {
-        usuarioRepositorio.getUserByUsernameAndPassword(username, password, { usuario ->
+    fun loadUserData(username: String) {
+        usuarioRepositorio.getUsuarioByUsername(username, { usuario ->
             _usuario.value = usuario
             userId.value = usuario.id.toString()
             userName.value = usuario.nombre
@@ -58,7 +58,7 @@ class PerfilUsuarioViewModel : ViewModel() {
         )
         if (usuario != null) {
             usuarioRepositorio.updateUsuario(usuario)
-            _usuario.value = usuario!!
+            _usuario.value = usuario
         }
     }
 }

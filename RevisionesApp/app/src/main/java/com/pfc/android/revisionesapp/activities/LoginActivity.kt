@@ -27,13 +27,14 @@ class LoginActivity : AppCompatActivity() {
         val savedUsername = sharedPreferences.getString("username", null)
         val remember = sharedPreferences.getBoolean("remember", false)
 
+        // Si el usuario ha marcado recordar y ha iniciado sesión, redirigir a MainActivity
         if (remember && savedUsername != null) {
-            // Si el usuario ha marcado recordar y ha iniciado sesión, redirigir a MainActivity
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        // Configuración del botón de inicio de sesión
         binding.botonLogin.setOnClickListener {
             try {
                 val username = binding.editUser.text.toString()
@@ -49,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                // cambiar lógica de autenticación por una llamada a la API
                 val credentials = mapOf("username" to username, "password" to password)
                 val call = retrofit.login(credentials)
 
@@ -64,17 +64,17 @@ class LoginActivity : AppCompatActivity() {
                             val sharedPreferences: SharedPreferences =
                                 getSharedPreferences("MyPrefs", MODE_PRIVATE)
                             val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                            if (remember) {
+//                            if (remember) {
                                 // Si el usuario ha marcado "Recordar", guardar el nombre de usuario y el estado de "Recordar"
                                 editor.putString("username", username)
                                 editor.putString("password", password)
                                 editor.putBoolean("remember", true)
-                            } else {
-                                // Si el usuario no ha marcado "Recordar", borrar el nombre de usuario y el estado de "Recordar"
-                                editor.remove("username")
-                                editor.remove("password")
-                                editor.remove("remember")
-                            }
+//                            } else {
+//                                // Si el usuario no ha marcado "Recordar", borrar el nombre de usuario y el estado de "Recordar"
+//                                editor.remove("username")
+//                                editor.remove("password")
+//                                editor.putBoolean("remember", false)
+//                            }
                             editor.apply()
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -110,36 +110,5 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
         }
-//                    }
-//
-//                }
-//
-//                if (username == "Admin" && password == "admin") {
-//                    val remember = binding.checkRecordar.isChecked
-//                    val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-//                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-//                    if (remember) {
-//                        // Si el usuario ha marcado "Recordar", guardar el nombre de usuario y el estado de "Recordar"
-//                        editor.putString("username", username)
-//                        editor.putBoolean("remember", true)
-//                    } else {
-//                        // Si el usuario no ha marcado "Recordar", borrar el nombre de usuario y el estado de "Recordar"
-//                        editor.remove("username")
-//                        editor.remove("remember")
-//                    }
-//                    editor.apply()
-//
-//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                } else {
-//                    Snackbar.make(binding.root, "El usuario o la contraseña son incorrectos", Snackbar.LENGTH_SHORT).show()
-//                }
-//            } catch (e: Exception) {
-//                // Manejo de errores generales
-//                Snackbar.make(binding.root, "Ha ocurrido un error: ${e.message}", Snackbar.LENGTH_LONG).show()
-//            }
-//        }
-//    }
     }
 }

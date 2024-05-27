@@ -1,6 +1,5 @@
 package com.pfc.android.revisionesapp.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,9 +12,9 @@ import com.pfc.android.revisionesapp.models.Equipo
 import com.pfc.android.revisionesapp.models.Incidencia
 
 @Suppress("DEPRECATION")
-class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener, IncidenciaDetailFragment.OnEditarClickListener {
+class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
+    lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,38 +24,16 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
         // Configurar la toolbar
         setSupportActionBar(binding.detailToolbar)
 
-        // Obtener el id de la incidencia
-        if (intent.extras?.getBoolean("nuevaIncidencia", false) == true) {
-            val fragment = IncidenciaDetailFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.detail_fragmentContainer, fragment)
-                .commit()
-        } else {
-            savedInstanceState ?: run {
-                intent.getSerializableExtra("incidencia")?.let { it as Incidencia }?.let { incidencia ->
-                    IncidenciaDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putSerializable("incidencia", incidencia)
-                        }
-                    }.also { fragment ->
-                        supportFragmentManager.beginTransaction()
-                            .add(R.id.detail_fragmentContainer, fragment)
-                            .commit()
-                    }
-                }
-            }
-        }
-
-        // Obtener el id del equipo
         if (intent.extras?.getBoolean("nuevoEquipo", false) == true) {
-            val fragment = EquipoDetailFragment()
+            val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
             supportFragmentManager.beginTransaction()
                 .add(R.id.detail_fragmentContainer, fragment)
                 .commit()
+            invalidateOptionsMenu()
         } else {
             savedInstanceState ?: run {
                 intent.getSerializableExtra("equipo")?.let { it as Equipo }?.let { equipo ->
-                    EquipoDetailFragment().apply {
+                    EquipoDetailFragment.newInstance(nuevoEquipo = false).apply {
                         arguments = Bundle().apply {
                             putSerializable("equipo", equipo)
                         }
@@ -68,6 +45,46 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
                 }
             }
         }
+
+        if (intent.extras?.getBoolean("nuevaIncidencia", false) == true) {
+            val fragment = IncidenciaDetailFragment.newInstance(nuevaIncidencia = true)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.detail_fragmentContainer, fragment)
+                .commit()
+            invalidateOptionsMenu()
+        } else {
+            savedInstanceState ?: run {
+                intent.getSerializableExtra("incidencia")?.let { it as Incidencia }
+                    ?.let { incidencia ->
+                        IncidenciaDetailFragment.newInstance(nuevaIncidencia = false).apply {
+                            arguments = Bundle().apply {
+                                putSerializable("incidencia", incidencia)
+                            }
+                        }.also { fragment ->
+                            supportFragmentManager.beginTransaction()
+                                .add(R.id.detail_fragmentContainer, fragment)
+                                .commit()
+                        }
+                    }
+            }
+        }
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val equipoDetailFragment =
+            supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
+        equipoDetailFragment?.let { fragment ->
+            menu.findItem(R.id.action_save).isVisible = fragment.nuevoEquipo
+            menu.findItem(R.id.action_editar).isVisible = !fragment.nuevoEquipo
+        }
+        val incidenciaDetailFragment =
+            supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment
+        incidenciaDetailFragment?.let { fragment ->
+            menu.findItem(R.id.action_save).isVisible = fragment.nuevaIncidencia
+            menu.findItem(R.id.action_editar).isVisible = !fragment.nuevaIncidencia
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -78,11 +95,12 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_editar -> {
-                // Aquí estás pasando un indicador de que se está creando un nuevo equipo
-                val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.detail_fragmentContainer, fragment)
-                    .commit()
+                (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment)?.toggleEditMode(
+                    true
+                )
+                (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment)?.toggleEditMode(
+                    true
+                )
                 item.isVisible = false  // Ocultar el elemento "Editar"
                 val guardarItem = binding.detailToolbar.menu.findItem(R.id.action_save)
                 guardarItem.isVisible = true  // Mostrar el elemento "Guardar"
@@ -90,6 +108,16 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
             }
 
             R.id.action_save -> {
+                val incidenciaDetailFragment =
+                    supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment
+                incidenciaDetailFragment?.let { fragment ->
+                    if (fragment.nuevaIncidencia) {
+                        fragment.createIncidencia()
+                    } else {
+                        fragment.updateIncidencia()
+                    }
+                    fragment.toggleEditMode(false)  // Desactivar la edición
+                }
                 val equipoDetailFragment =
                     supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
                 equipoDetailFragment?.let { fragment ->
@@ -97,8 +125,8 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
                         fragment.createEquipo()
                     } else {
                         fragment.updateEquipo()
-                        fragment.toggleEditMode()
                     }
+                    fragment.toggleEditMode(false)  // Desactivar la edición
                 }
                 item.isVisible = false  // Ocultar el elemento "Guardar"
                 val editarItem = binding.detailToolbar.menu.findItem(R.id.action_editar)
@@ -114,11 +142,4 @@ class DetailActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickLi
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    override fun onEditarClick() {
-        invalidateOptionsMenu()
-        (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment)?.toggleEditMode()
-        (supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment)?.toggleEditMode()
-    }
-
 }

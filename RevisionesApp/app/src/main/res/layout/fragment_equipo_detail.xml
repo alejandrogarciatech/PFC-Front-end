@@ -21,7 +21,9 @@
             android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:textColorHint="#0800FF"/>
+            android:textColorHint="#0800FF"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -37,7 +39,9 @@
             android:id="@+id/nombreEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -53,7 +57,9 @@
             android:id="@+id/tipoProductoEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -69,7 +75,9 @@
             android:id="@+id/marcaEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -85,7 +93,9 @@
             android:id="@+id/modeloEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -101,7 +111,9 @@
             android:id="@+id/nSerieEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -117,7 +129,9 @@
             android:id="@+id/pesoEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -133,7 +147,9 @@
             android:id="@+id/dimensionesEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -149,7 +165,9 @@
             android:id="@+id/ubicacionEquipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
 </TableLayout>

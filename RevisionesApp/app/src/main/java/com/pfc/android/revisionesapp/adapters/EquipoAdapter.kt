@@ -53,4 +53,9 @@ class EquipoAdapter(var lista: ArrayList<Equipo>, var contexto: Context) :
         this.lista = lista as ArrayList<Equipo>
         notifyDataSetChanged()
     }
+
+    fun removeItem(position: Int) {
+        lista.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }

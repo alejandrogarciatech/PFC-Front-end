@@ -6,8 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.activities.DetailActivity
 import com.pfc.android.revisionesapp.activities.MainActivity
 import com.pfc.android.revisionesapp.adapters.IncidenciasAdapter
@@ -25,13 +27,6 @@ class IncidenciasFragment : Fragment() {
     private lateinit var incidenciasAdapter: IncidenciasAdapter
     private val apiService = RetrofitClient.instance.create(ApiService::class.java)
     private val call = apiService.getIncidencias()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val mainActivity = activity as MainActivity
-        mainActivity.supportActionBar?.title = "Incidencias"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,8 +50,16 @@ class IncidenciasFragment : Fragment() {
         binding.incidenciasRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        verIncidencias()
+        nuevaIncidencia()
+    }
+
+    private fun verIncidencias() {
         call.enqueue(object : Callback<List<Incidencia>> {
-            override fun onResponse(call: Call<List<Incidencia>>, response: Response<List<Incidencia>>) {
+            override fun onResponse(
+                call: Call<List<Incidencia>>,
+                response: Response<List<Incidencia>>
+            ) {
                 if (response.isSuccessful) {
                     val incidencias = response.body()
                     if (incidencias != null) {
@@ -77,9 +80,22 @@ class IncidenciasFragment : Fragment() {
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Incidencia>>, t: Throwable) {
                 Log.e("Incidencias", "Error al realizar la solicitud: ${t.message}")
             }
         })
+    }
+
+    private fun nuevaIncidencia() {
+        val nuevaIncidenciaButton: Button =
+            view?.findViewById(R.id.btnCrearIncidencia) ?: Button(requireContext())
+        nuevaIncidenciaButton.setOnClickListener {
+//            val action = IncidenciasFragmentDirections.actionIncidenciasFragmentToNuevaIncidenciaDetailFragment()
+//            findNavController().navigate(action)
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("nuevaIncidencia", true)
+            startActivity(intent)
+        }
     }
 }

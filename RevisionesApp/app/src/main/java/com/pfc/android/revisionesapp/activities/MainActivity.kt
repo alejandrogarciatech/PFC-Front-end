@@ -18,7 +18,7 @@ import com.pfc.android.revisionesapp.models.Equipo
 import com.pfc.android.revisionesapp.repositories.EquipoRepository
 
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickListener {
+class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
@@ -141,21 +141,6 @@ class MainActivity : AppCompatActivity(), EquipoDetailFragment.OnEditarClickList
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    override fun onEditarClick() {
-        invalidateOptionsMenu()
-        val fragment =
-            supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
-        fragment?.toggleEditMode()
-    }
-
-//    private fun crearNuevoEquipo() {
-//        val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.detail_fragmentContainer, fragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
 
     // Sobreescribir el método onBackPressed para controlar la navegación
     override fun onBackPressed() {

@@ -1,66 +1,86 @@
 package com.pfc.android.revisionesapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.pfc.android.revisionesapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.pfc.android.revisionesapp.activities.DetailActivity
 import com.pfc.android.revisionesapp.activities.MainActivity
+import com.pfc.android.revisionesapp.adapters.EspaciosAdapter
+import com.pfc.android.revisionesapp.databinding.FragmentEspaciosBinding
+import com.pfc.android.revisionesapp.interfaces.ApiService
+import com.pfc.android.revisionesapp.models.Espacio
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EspaciosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EspaciosFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-        val mainActivity = activity as MainActivity
-        mainActivity.supportActionBar?.title = "Espacios"
-    }
+    private lateinit var binding: FragmentEspaciosBinding
+    private lateinit var listaEspacios: ArrayList<Espacio>
+    private lateinit var espaciosAdapter: EspaciosAdapter
+    private val apiService = RetrofitClient.instance.create(ApiService::class.java)
+    private val call = apiService.getEspacios()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_espacios, container, false)
+        binding = FragmentEspaciosBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstaceState: Bundle?){
+        super.onViewCreated(view, savedInstaceState)
 
         val mainActivity = activity as MainActivity
         mainActivity.supportActionBar?.title = "Espacios"
+
+        espaciosAdapter = EspaciosAdapter(ArrayList(), requireContext())
+        listaEspacios = ArrayList()
+        espaciosAdapter = EspaciosAdapter(listaEspacios, requireContext())
+
+        binding.espaciosRecyclerView.adapter = espaciosAdapter
+        binding.espaciosRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        binding.espaciosRecyclerView.adapter = espaciosAdapter
+        verEspacios()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EspaciosFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EspaciosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun verEspacios() {
+        call.enqueue(object : Callback<List<Espacio>> {
+            override fun onResponse(
+                call: Call<List<Espacio>>,
+                response: Response<List<Espacio>>
+            ) {
+                if (response.isSuccessful) {
+                    val espacios = response.body()
+                    if (espacios != null) {
+                        Log.d("Espacios", espacios.toString())
+                        listaEspacios = espacios as ArrayList<Espacio>
+                        espaciosAdapter.updateList(listaEspacios)
+
+                        espaciosAdapter.setOnItemClickListener(object :
+                            EspaciosAdapter.OnItemClickListener {
+                            override fun onItemClick(espacio: Espacio) {
+                                val intent = Intent(requireActivity(), DetailActivity::class.java)
+                                intent.putExtra("espacio", espacio)
+                                startActivity(intent)
+                            }
+                        })
+                    } else {
+                        Log.e("Espacios", "la lista de espacios es nula")
+                    }
                 }
             }
+
+            override fun onFailure(call: Call<List<Espacio>>, t: Throwable) {
+                Log.e("Incidencias", "Error al realizar la solicitud: ${t.message}")
+            }
+        })
     }
 }

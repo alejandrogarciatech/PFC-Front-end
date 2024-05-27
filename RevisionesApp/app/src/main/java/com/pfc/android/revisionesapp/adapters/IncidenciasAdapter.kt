@@ -8,39 +8,34 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.activities.DetailActivity
+import com.pfc.android.revisionesapp.databinding.CardIncidenciaBinding
 import com.pfc.android.revisionesapp.models.Incidencia
 
 class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context) :
     RecyclerView.Adapter<IncidenciasAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imagen: ImageView = itemView.findViewById(R.id.item_imagen)
-        var id: TextView = itemView.findViewById(R.id.item_titulo)
-        var descripcion: TextView = itemView.findViewById(R.id.item_detalle)
+    inner class ViewHolder(private val binding: CardIncidenciaBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(incidencia: Incidencia) {
-
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailActivity::class.java).apply {
-                    putExtra("incidenciaId", incidencia.id)
-                }
-                itemView.context.startActivity(intent)
-            }
+//            Glide.with(binding.itemImagen.context)
+//                .load(incidencia.imageUrl) // Asume que 'imageUrl' es la URL de la imagen de la incidencia
+//                .placeholder(R.drawable.ic_launcher_foreground) // Imagen de reserva mientras se carga la imagen
+//                .into(binding.itemImagen)
+            binding.itemTitulo.text = incidencia.id.toString()
+            binding.itemDetalle.text = incidencia.descripcion
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val view: View =
-            LayoutInflater.from(contexto).inflate(R.layout.card_incidencia, viewGroup, false)
-        return ViewHolder(view)
+        val binding: CardIncidenciaBinding = CardIncidenciaBinding.inflate(LayoutInflater.from(contexto), viewGroup, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val incidencia: Incidencia = lista[position]
-        viewHolder.imagen.setImageResource(R.drawable.ic_launcher_foreground)
-        viewHolder.id.text = incidencia.id.toString()
-        viewHolder.descripcion.text = incidencia.descripcion
+        viewHolder.bind(incidencia)
 
         viewHolder.itemView.setOnClickListener {
             listener.onItemClick(incidencia)
@@ -62,7 +57,10 @@ class IncidenciasAdapter(var lista: ArrayList<Incidencia>, var contexto: Context
     }
 
     fun updateList(lista: List<Incidencia>?) {
-        this.lista = lista as ArrayList<Incidencia>
+        this.lista.clear()
+        if (lista != null) {
+            this.lista.addAll(lista)
+        }
         notifyDataSetChanged()
     }
 }

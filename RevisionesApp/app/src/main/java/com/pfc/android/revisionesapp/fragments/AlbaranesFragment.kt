@@ -1,63 +1,64 @@
 package com.pfc.android.revisionesapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.pfc.android.revisionesapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pfc.android.revisionesapp.activities.MainActivity
+import com.pfc.android.revisionesapp.adapters.AlbaranesAdapter
+import com.pfc.android.revisionesapp.databinding.FragmentAlbaranesBinding
+import com.pfc.android.revisionesapp.interfaces.ApiService
+import com.pfc.android.revisionesapp.models.Albaran
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AlbaranesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AlbaranesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-        val mainActivity = activity as MainActivity
-        mainActivity.supportActionBar?.title = "Albaranes"
-    }
+    private lateinit var binding: FragmentAlbaranesBinding
+    private lateinit var listaAlbaranes: ArrayList<Albaran>
+    private lateinit var albaranesAdapter: AlbaranesAdapter
+    private val apiService = RetrofitClient.instance.create(ApiService::class.java)
+    private val call = apiService.getAlbaranes()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_albaranes, container, false)
+        binding = FragmentAlbaranesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AlbaranesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AlbaranesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstaceState: Bundle?){
+        super.onViewCreated(view, savedInstaceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.title = "Albaranes"
+
+        albaranesAdapter = AlbaranesAdapter(ArrayList(), requireContext())
+        listaAlbaranes = ArrayList()
+        albaranesAdapter = AlbaranesAdapter(listaAlbaranes, requireContext())
+
+        binding.albaranesRecyclerView.adapter = albaranesAdapter
+        binding.albaranesRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        verAlbaranes()
+    }
+
+    private fun verAlbaranes(){
+        call.enqueue(object : Callback<List<Albaran>> {
+            override fun onResponse(call: Call<List<Albaran>>, response: Response<List<Albaran>>) {
+                if (response.isSuccessful) {
+                    listaAlbaranes = response.body() as ArrayList<Albaran>
+                    albaranesAdapter.updateList(listaAlbaranes)
                 }
             }
+            override fun onFailure(call: Call<List<Albaran>>, t: Throwable) {
+                Log.e("Error", t.message.toString())
+            }
+        })
     }
 }

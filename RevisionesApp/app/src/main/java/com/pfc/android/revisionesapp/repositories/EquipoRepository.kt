@@ -13,16 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class EquipoRepository(private val context: Context) {
 
-    private val apiService: ApiService
-
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.37:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        apiService = retrofit.create(ApiService::class.java)
-    }
+    private val retrofit = com.pfc.android.revisionesapp.fragments.RetrofitClient.instance
+    private val apiService = retrofit.create(com.pfc.android.revisionesapp.interfaces.ApiService::class.java)
 
     fun getEquipo(equipoId: String, onSuccess: (Equipo) -> Unit, onError: (String) -> Unit) {
         apiService.getEquipos(equipoId).enqueue(object : Callback<Equipo> {

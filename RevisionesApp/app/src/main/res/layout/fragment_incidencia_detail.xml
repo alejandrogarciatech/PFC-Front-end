@@ -18,9 +18,11 @@
 
         <EditText
             android:id="@+id/idIncidenciaEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -36,7 +38,9 @@
             android:id="@+id/descripcionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -52,7 +56,9 @@
             android:id="@+id/estadoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -68,7 +74,9 @@
             android:id="@+id/prioridadEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -84,7 +92,9 @@
             android:id="@+id/albaranEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -100,7 +110,9 @@
             android:id="@+id/usuarioEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>/>
     </TableRow>
 
     <TableRow>
@@ -108,7 +120,7 @@
             android:id="@+id/fcreacionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha de Creación:"
+            android:text="Creado en:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
@@ -116,7 +128,10 @@
             android:id="@+id/fcreacionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:enabled="false"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -124,7 +139,7 @@
             android:id="@+id/factualizacionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha de Actualización:"
+            android:text="Actualizado en:"
             android:textStyle="bold"
             android:textSize="20sp" />
 
@@ -132,7 +147,10 @@
             android:id="@+id/factualizacionEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:enabled="false"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
     <TableRow>
@@ -148,7 +166,9 @@
             android:id="@+id/equipoEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionNext"
+            android:inputType="text"/>
     </TableRow>
 
 </TableLayout>

@@ -17,7 +17,7 @@
         android:background="@drawable/botones"
         android:text="Nueva Incidencia"
         android:textSize="10sp"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

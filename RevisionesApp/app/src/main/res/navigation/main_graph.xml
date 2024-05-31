@@ -50,9 +50,6 @@
             android:id="@+id/action_incidenciasFragment_to_incidenciaDetailFragment"
             app:destination="@id/incidenciaDetailFragment"
             app:popUpTo="@id/incidenciasFragment"/>
-        <action
-            android:id="@+id/action_incidenciasFragment_to_nuevaIncidenciaDetailFragment"
-            app:destination="@id/nuevaIncidenciaDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/albaranesFragment"
@@ -74,10 +71,6 @@
         android:name="com.pfc.android.revisionesapp.fragments.IncidenciaDetailFragment"
         tools:layout="@layout/fragment_incidencia_detail">
     </fragment>
-    <fragment
-        android:id="@+id/nuevaIncidenciaDetailFragment"
-        android:name="com.pfc.android.revisionesapp.fragments.NuevaIncidenciaDetailFragment"
-        tools:layout="@layout/fragment_incidencia_detail" />
     <activity
         android:id="@+id/perfilUsuarioActivity"
         android:name="com.pfc.android.revisionesapp.activities.PerfilUsuarioActivity"

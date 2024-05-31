@@ -70,4 +70,20 @@ class IncidenciaRepository (private val context: Context){
             }
         })
     }
+
+    fun deleteIncidencia(incidenciaId: Int) {
+        apiService.deleteIncidencia(incidenciaId).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Incidencia eliminada con éxito", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error al eliminar la incidencia. Código de estado: ${response.code()}, Mensaje: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(context, "Fallo al eliminar la incidencia", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }

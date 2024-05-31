@@ -120,5 +120,20 @@ class IncidenciaDetailFragment : Fragment() {
         )
         incidenciaRepository.createIncidencia(incidencia)
     }
+
+    fun deleteIncidencia(){
+        val incidencia = Incidencia(
+            binding.idIncidenciaEditText.text.toString().toInt(),
+            binding.descripcionEditText.text.toString(),
+            binding.estadoEditText.text.toString(),
+            binding.prioridadEditText.text.toString(),
+            binding.albaranEditText.text.toString(),
+            binding.usuarioEditText.text.toString(),
+            binding.fcreacionEditText.text.toString(),
+            binding.factualizacionEditText.text.toString(),
+            binding.equipoEditText.text.toString()
+        )
+        incidenciaRepository.deleteIncidencia(incidencia.id)
+    }
 }
 

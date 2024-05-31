@@ -8,13 +8,11 @@ import com.pfc.android.revisionesapp.models.Equipo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class EquipoRepository(private val context: Context) {
 
     private val retrofit = com.pfc.android.revisionesapp.fragments.RetrofitClient.instance
-    private val apiService = retrofit.create(com.pfc.android.revisionesapp.interfaces.ApiService::class.java)
+    private val apiService = retrofit.create(ApiService::class.java)
 
     fun getEquipo(equipoId: String, onSuccess: (Equipo) -> Unit, onError: (String) -> Unit) {
         apiService.getEquipos(equipoId).enqueue(object : Callback<Equipo> {
@@ -69,6 +67,22 @@ class EquipoRepository(private val context: Context) {
 
             override fun onFailure(call: Call<Equipo>, t: Throwable) {
                 Toast.makeText(context, "Fallo al crear el equipo", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun deleteEquipo(equipoId: String) {
+        apiService.deleteEquipo(equipoId).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(context, "Equipo eliminado con éxito", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error al eliminar el equipo. Código de estado: ${response.code()}, Mensaje: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(context, "Fallo al eliminar el equipo", Toast.LENGTH_SHORT).show()
             }
         })
     }

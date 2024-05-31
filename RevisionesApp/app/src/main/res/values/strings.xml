@@ -15,4 +15,14 @@
     <string name="ir_a_equipos">Equipos</string>
     <string name="ir_a_espacios">Espacios</string>
     <string name="ir_a_incidencias">Incidencias</string>
+    <string name="Ubicacion">Ubicación</string>
+    <string name="Dimensiones">Dimensiones</string>
+    <string name="Peso">Peso</string>
+    <string name="Marca">Marca</string>
+    <string name="Modelo">Modelo</string>
+    <string name="NumeroSerie">Número de serie</string>
+    <string name="TipoProducto">Tipo de producto</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Id">Id</string>
+
 </resources>

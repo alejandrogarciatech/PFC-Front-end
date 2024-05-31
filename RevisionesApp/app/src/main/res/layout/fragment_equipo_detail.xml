@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,167 +7,174 @@
     tools:context=".fragments.EquipoDetailFragment"
     android:id="@+id/equipoDetailFragment">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/idLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Id:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/idEquipoEditText"
-            android:layout_width="227dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColorHint="#0800FF"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Id">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/nombreLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nombreEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/idEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Nombre">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/tipoProductoLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Producto:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tipoProductoEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/nombreEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/TipoProducto">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/marcaLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Marca:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/marcaEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/tipoProductoEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Marca">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/modeloLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Modelo:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/modeloEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/marcaEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Modelo">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/nSerieLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nº Serie:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nSerieEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/modeloEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/NumeroSerie">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/pesoLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Peso:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pesoEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/nSerieEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Peso">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/dimensionesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dimensiones:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dimensionesEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/pesoEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Dimensiones">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/ubicacionLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubicación:"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
 
-        <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ubicacionEquipoEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
-    </TableRow>
+            app:layout_constraintTop_toBottomOf="@id/dimensionesEquipoEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/Ubicacion">
 
-</TableLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

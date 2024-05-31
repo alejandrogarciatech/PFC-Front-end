@@ -18,17 +18,14 @@ interface ApiService {
     @POST("/login")
     fun login(@Body credentials: Map<String, String>): Call<Usuario>
 
-//    @GET("api/usuarios")
-//    fun getUsuarios(): Call<List<Usuario>>
+    @GET("api/usuarios")
+    fun getUsuarios(): Call<List<Usuario>>
 
     @GET("api/usuarios/{username}")
     fun getUsuarioByUsername(@Path("username") username: String): Call<Usuario>
 
     @PUT("api/usuarios/{id}")
     fun updateUsuario(@Path("id") id: Long, @Body usuario: Usuario): Call<Usuario>
-
-//    @POST("api/usuarios/registro")
-//    fun login(@Body credentials: Map<String, String>): Call<Usuario>
 
     @GET("api/equipos")
     fun getEquipos(): Call<List<Equipo>>
@@ -43,7 +40,7 @@ interface ApiService {
     fun createEquipo(@Body equipo: Equipo): Call<Equipo>
 
     @DELETE("api/equipos/{id}")
-    fun deleteEquipo(@Path("id") id: String): Call<Equipo>
+    fun deleteEquipo(@Path("id") id: String): Call<Void>
 
     @GET("api/incidencias")
     fun getIncidencias(): Call<List<Incidencia>>
@@ -56,6 +53,9 @@ interface ApiService {
 
     @POST("api/incidencias/crear")
     fun createIncidencia(@Body incidencia: Incidencia): Call<Incidencia>
+
+    @DELETE("api/incidencias/{id}")
+    fun deleteIncidencia(@Path("id") id: Int): Call<Void>
 
     @GET("api/albaranes")
     fun getAlbaranes(): Call<List<Albaran>>

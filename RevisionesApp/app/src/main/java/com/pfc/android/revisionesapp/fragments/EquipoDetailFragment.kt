@@ -50,7 +50,7 @@ class EquipoDetailFragment : Fragment() {
         }
     }
 
-    fun toggleEditMode(editMode: Boolean) {
+    fun toggleEditMode(editMode: Boolean): Boolean {
         with(binding) {
             idEquipoEditText.isEnabled = editMode
             nombreEquipoEditText.isEnabled = editMode
@@ -62,49 +62,65 @@ class EquipoDetailFragment : Fragment() {
             dimensionesEquipoEditText.isEnabled = editMode
             ubicacionEquipoEditText.isEnabled = editMode
         }
+        return editMode
     }
 
     private fun fillFields(equipo: Equipo) {
         with(binding) {
-            idEquipoEditText.setText(equipo.id)
-            nombreEquipoEditText.setText(equipo.nombre)
-            tipoProductoEquipoEditText.setText(equipo.tipoProducto)
-            modeloEquipoEditText.setText(equipo.marca)
-            marcaEquipoEditText.setText(equipo.modelo)
-            nSerieEquipoEditText.setText(equipo.nSerie)
-            pesoEquipoEditText.setText(equipo.peso.toString())
-            dimensionesEquipoEditText.setText(equipo.dimensiones.toString())
-            ubicacionEquipoEditText.setText(equipo.ubicacion)
+            idEquipoEditText.editText?.setText(equipo.id)
+            nombreEquipoEditText.editText?.setText(equipo.nombre)
+            tipoProductoEquipoEditText.editText?.setText(equipo.tipoProducto)
+            modeloEquipoEditText.editText?.setText(equipo.marca)
+            marcaEquipoEditText.editText?.setText(equipo.modelo)
+            nSerieEquipoEditText.editText?.setText(equipo.nSerie)
+            pesoEquipoEditText.editText?.setText(equipo.peso.toString())
+            dimensionesEquipoEditText.editText?.setText(equipo.dimensiones.toString())
+            binding.ubicacionEquipoEditText.editText?.setText(equipo.ubicacion)
         }
     }
 
     fun updateEquipo() {
         val equipo = Equipo(
-            binding.idEquipoEditText.text.toString(),
-            binding.nombreEquipoEditText.text.toString(),
-            binding.tipoProductoEquipoEditText.text.toString(),
-            binding.marcaEquipoEditText.text.toString(),
-            binding.modeloEquipoEditText.text.toString(),
-            binding.nSerieEquipoEditText.text.toString(),
-            binding.pesoEquipoEditText.text.toString().toDouble(),
-            binding.dimensionesEquipoEditText.text.toString().toDouble(),
-            binding.ubicacionEquipoEditText.text.toString()
+            binding.idEquipoEditText.editText?.text.toString(),
+            binding.nombreEquipoEditText.editText?.text.toString(),
+            binding.tipoProductoEquipoEditText.editText?.text.toString(),
+            binding.marcaEquipoEditText.editText?.text.toString(),
+            binding.modeloEquipoEditText.editText?.text.toString(),
+            binding.nSerieEquipoEditText.editText?.text.toString(),
+            binding.pesoEquipoEditText.editText?.text.toString().toDouble(),
+            binding.dimensionesEquipoEditText.editText?.text.toString().toDouble(),
+            binding.ubicacionEquipoEditText.editText?.text.toString()
         )
         equipoRepository.updateEquipo(equipo)
     }
 
     fun createEquipo() {
         val nuevoEquipo = Equipo(
-            binding.idEquipoEditText.text.toString(),
-            binding.nombreEquipoEditText.text.toString(),
-            binding.tipoProductoEquipoEditText.text.toString(),
-            binding.marcaEquipoEditText.text.toString(),
-            binding.modeloEquipoEditText.text.toString(),
-            binding.nSerieEquipoEditText.text.toString(),
-            binding.pesoEquipoEditText.text.toString().toDouble(),
-            binding.dimensionesEquipoEditText.text.toString().toDouble(),
-            binding.ubicacionEquipoEditText.text.toString()
+            binding.idEquipoEditText.editText?.text.toString(),
+            binding.nombreEquipoEditText.editText?.text.toString(),
+            binding.tipoProductoEquipoEditText.editText?.text.toString(),
+            binding.marcaEquipoEditText.editText?.text.toString(),
+            binding.modeloEquipoEditText.editText?.text.toString(),
+            binding.nSerieEquipoEditText.editText?.text.toString(),
+            binding.pesoEquipoEditText.editText?.text.toString().toDouble(),
+            binding.dimensionesEquipoEditText.editText?.text.toString().toDouble(),
+            binding.ubicacionEquipoEditText.editText?.text.toString()
         )
         equipoRepository.createEquipo(nuevoEquipo)
+    }
+
+    fun deleteEquipo(){
+        val equipo = Equipo(
+            binding.idEquipoEditText.editText?.text.toString(),
+            binding.nombreEquipoEditText.editText?.text.toString(),
+            binding.tipoProductoEquipoEditText.editText?.text.toString(),
+            binding.marcaEquipoEditText.editText?.text.toString(),
+            binding.modeloEquipoEditText.editText?.text.toString(),
+            binding.nSerieEquipoEditText.editText?.text.toString(),
+            binding.pesoEquipoEditText.editText?.text.toString().toDouble(),
+            binding.dimensionesEquipoEditText.editText?.text.toString().toDouble(),
+            binding.ubicacionEquipoEditText.editText?.text.toString()
+        )
+        equipoRepository.deleteEquipo(equipo.id)
     }
 }

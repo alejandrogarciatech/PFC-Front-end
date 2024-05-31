@@ -3,7 +3,9 @@ package com.pfc.android.revisionesapp.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.pfc.android.revisionesapp.R
 import com.pfc.android.revisionesapp.databinding.ActivityDetailBinding
 import com.pfc.android.revisionesapp.fragments.EquipoDetailFragment
@@ -23,6 +25,37 @@ class DetailActivity : AppCompatActivity() {
 
         // Configurar la toolbar
         setSupportActionBar(binding.detailToolbar)
+
+        // Configurar botón borrado
+        binding.btnDelete.isVisible = false
+        binding.btnDelete.setOnClickListener {
+            val equipoDetailFragment =
+                supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? EquipoDetailFragment
+            equipoDetailFragment?.let { fragment ->
+                AlertDialog.Builder(this)
+                    .setTitle("Confirmación de borrado")
+                    .setMessage("¿Estás seguro de que quieres borrar este equipo?")
+                    .setPositiveButton("Aceptar") { _, _ ->
+                        fragment.deleteEquipo()
+                        onBackPressed() // Volver al fragmento anterior
+                    }
+                    .setNegativeButton("Cancelar", null) // No hacer nada al cancelar
+                    .show()
+            }
+            val incidenciaDetailFragment =
+                supportFragmentManager.findFragmentById(R.id.detail_fragmentContainer) as? IncidenciaDetailFragment
+            incidenciaDetailFragment?.let { fragment ->
+                AlertDialog.Builder(this)
+                    .setTitle("Confirmación de borrado")
+                    .setMessage("¿Estás seguro de que quieres borrar esta incidencia?")
+                    .setPositiveButton("Aceptar") { _, _ ->
+                        fragment.deleteIncidencia()
+                        onBackPressed() // Volver al fragmento anterior
+                    }
+                    .setNegativeButton("Cancelar", null) // No hacer nada al cancelar
+                    .show()
+            }
+        }
 
         if (intent.extras?.getBoolean("nuevoEquipo", false) == true) {
             val fragment = EquipoDetailFragment.newInstance(nuevoEquipo = true)
@@ -68,7 +101,6 @@ class DetailActivity : AppCompatActivity() {
                     }
             }
         }
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
@@ -104,6 +136,7 @@ class DetailActivity : AppCompatActivity() {
                 item.isVisible = false  // Ocultar el elemento "Editar"
                 val guardarItem = binding.detailToolbar.menu.findItem(R.id.action_save)
                 guardarItem.isVisible = true  // Mostrar el elemento "Guardar"
+                binding.btnDelete.isVisible = true  // Mostrar el botón de borrado
                 true
             }
 
@@ -131,6 +164,7 @@ class DetailActivity : AppCompatActivity() {
                 item.isVisible = false  // Ocultar el elemento "Guardar"
                 val editarItem = binding.detailToolbar.menu.findItem(R.id.action_editar)
                 editarItem.isVisible = true  // Mostrar el elemento "Editar"
+                binding.btnDelete.isVisible = false // Ocultar el botón de borrado
                 true
             }
 
